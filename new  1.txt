@@ -1,0 +1,71 @@
+//The Next node the Ghost will be at
+Start=initial node;
+
+//The Last node the target just passed
+//If the Target is Pac-man then the last node the Pac-man pass is the target (Depending on the Ghost)
+//If the Target is home then the target is the pre-defined node 
+Goal=final node;
+
+
+//I'm assuming this is the list of where all the nodes that have not been visited
+open_list.insert(Start);                              //list of type node
+
+//I'm assuming this the a list of the nodes that were already visited and declined
+closed_list=empty set;                             //list of type node
+
+//The initial node G Score will be set to zero
+Start.g=0; Start.h=heuristic(Start); Start.f=Start.g+Start.h;
+
+//Start of the Functions
+function A*(){                                             //Driver function
+
+	while(!open_list.empty()){            //run until open list is empty
+
+
+		process=open_list(node with min(f));
+		
+		
+		//If the goal was found
+		if(process==Goal)
+			return (function path(process));              //path to goal found
+
+		open_list.remove(process);
+		closed_list.insert(process);
+		
+		
+		 //run for all the nodes possible from current
+		foreach(node in nextnodes(process)) {        
+
+			//Does not exist in closed list
+			if(closed_list.count(node)!=0)            
+				skip this loop once;
+				
+			//Does not exist in open list
+			if(open_list.count(node)==0)               
+				open_list.insert(node)
+			
+			//if exists find node in open_list
+			//better g score for same node found
+			else{
+				actual_node=open_list.find(node);       
+				if(node.g<actual_node.g){                  
+					actual_node.g=node.g;
+					actual_node.f=node.f;
+					//change parent to better(earlier parent)
+					actual_node.parent=node.parent;
+				}
+			}
+		}
+	}
+
+	print(“Not possible to reach goal”);
+
+}
+
+function nextnodes(node){
+    return list of all possible next nodes from node;
+}
+
+function path(node){
+    construct the path from node to start using node.parent;
+}

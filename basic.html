@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.js"></script>
+<script type="text/javascript" src="../three.js-master/examples/js/controls/OrbitControls.js"></script>
+<script type="text/javascript" src="../three.js-master/examples/js/controls/DragControls.js"></script>
+<script type="text/javascript" src="../three.js-master/examples/js/controls/TrackballControls.js"></script>
+<script src="../threex.dynamictexture-master/threex.dynamictexture.js"></script>
+<body style='margin: 0px; background-color: #bbbbbb; overflow: hidden;'><script>
+	var renderer	= new THREE.WebGLRenderer();
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	var updateFcts	= [];
+	var scene	= new THREE.Scene();
+	var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100 );
+	var countingDown= 100;
+	camera.position.z = 3;
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		add an object and make it move					//
+	//////////////////////////////////////////////////////////////////////////////////	
+	
+	var dynamicTexture	= new THREEx.DynamicTexture(512,512)
+	dynamicTexture.context.font	= "bolder 30px Verdana";
+	
+	updateFcts.push(function(delta, now){
+		// build the text which contains the time
+		if(countingDown < 0) var text = "Complete!!!!";
+		else{
+			var text = "Jason's Text Count Down:" + Math.floor(countingDown);
+			countingDown-=0.05;
+		}
+		// update the text
+		//dynamicTexture.clear('black').drawText(text, undefined, 256, 'red')
+		dynamicTexture.clear('black').drawText(text, 12, 306, 'white')
+	})
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		comment								//
+	//////////////////////////////////////////////////////////////////////////////////	
+	var geometry	= new THREE.PlaneGeometry( 7, 5, 1);
+	var material	= new THREE.MeshBasicMaterial({
+		map	: dynamicTexture.texture
+	})
+	var mesh	= new THREE.Mesh( geometry, material );
+	mesh.position.z = -15;
+	scene.add( mesh );
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		Camera Controls							//
+	//////////////////////////////////////////////////////////////////////////////////
+	/**
+	var mouse	= {x : 0, y : 0}
+	document.addEventListener('mousemove', function(event){
+		//mouse.x	= (event.clientX / window.innerWidth ) - 0.5
+		//mouse.y	= (event.clientY / window.innerHeight) - 0.5
+	}, false)
+	**/
+	updateFcts.push(function(delta, now){
+		//camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
+		//camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
+		camera.lookAt( scene.position )
+	})
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		render the scene						//
+	//////////////////////////////////////////////////////////////////////////////////
+	updateFcts.push(function(){
+		renderer.render( scene, camera );		
+	})
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		loop runner							//
+	//////////////////////////////////////////////////////////////////////////////////
+	var lastTimeMsec= null
+	requestAnimationFrame(function animate(nowMsec){
+		// keep looping
+		requestAnimationFrame( animate );
+		// measure time
+		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
+		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
+		lastTimeMsec	= nowMsec
+		// call each update function
+		updateFcts.forEach(function(updateFn){
+			updateFn(deltaMsec/1000, nowMsec/1000)
+		})
+	})
+</script></body>

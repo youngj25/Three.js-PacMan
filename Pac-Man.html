@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	 <head>
+	 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+		 <link rel="stylesheet" type="text/css" href="../Main.css"/>
+		 <link rel="stylesheet" type="text/css" href="Pac.css"/>
+		 <!-- Bootstrap -->
+		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	 </head>
+	 
+	 <body>
+
+		 <header>
+			 <h1>J.A.Y.'s Multi-player Networking Arcade!!!</h1>
+		 </header>
+	  
+		 <!-- NAV -->
+		 <nav class="navbar navbar-inverse navbar-static-top"> 
+			 <div class="container-fluid">
+					 <div class="navbar-header">
+						 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+							 <!-- Gives me the links in the button-->
+							 <span class="icon-bar"></span>
+							 <span class="icon-bar"></span>
+							 <span class="icon-bar"></span>  
+						 </button>
+						 <!-- <a class="navbar-brand" href="#" id="demo">Username: </a> -->
+					 </div>
+				 <div class = "collapse navbar-collapse" id="myNavbar">
+				
+					 <ul class="nav navbar-nav">
+						 <li><a href="../index.html">Home</a></li>
+						 <li><a href="../FlappyBird/FlappyBird.html">Flappy Bird</a></li>
+						 <li><a href="../Domino/Domino.html">Domino</a></li>
+						 <li class ="active"><a href="#">Pac-Man</a></li>
+						 <li><a href="../CB_Park/park.html">Park</a></li>
+						 <li><a href="../ReactExamples/React.html">React</a></li>
+					 </ul>
+					 <ul class = "nav navbar-nav navbar-right"> </ul>
+					 
+				 </div>
+			 </div>
+		 </nav>
+
+
+		 <article>
+			 <h1 align = "center"><U>Pac-Man:</U></h1>
+			 <p class = "leadingPara">
+				 The classic Pac-man comes back to life with a twist. 
+				 Two player will each control a specific Pac-man character.
+				 Within a two minute time limit, both players will try to eat as many pellets as possible while staying alive.
+				 Players can die from being caught by the ghosts or caught by a Super sized Pac-man.	 
+				 Once there is only one player left then the remaining player wins the game.	 
+			 </p>
+			 
+			 <br>
+			 
+			 <img src="ghostBusters.gif" width="300" height="100" class="center">
+			 <br>
+			 <p class = "detailPara">
+				 Some of the major challenges while creating this game was the getting
+				 "Collision Detection" feature. For this game, I used Three.JS for this game
+				 and which allows for simple and nice looking graphics. However, Three.js
+				 doesn't have any feature that will allow you to detect when to objects have
+				 collided. For a game like Pac-man, collisions happens almost every second.
+				 You collide not only when Pac-man runs into a ghost or wall/boundary, but
+				 additionally when you run into another player or when you eat a pellet or
+				 special fruit.* Running A* with the four separate ghost and keeping them in
+				 sync. Having the ghost target node be a node that test just passed which means
+				 that node would be in the closed list, since it cannot go back to a node that
+				 it passed.... Ghost in Pac-man, are not allowed to go backwards only forwards.
+				 Getting the portal to work on a single computer was super easy lol once it 
+				 passed a certain point make it add/sub a certain amount from the height and 
+				 Boom the Pac-man was teleported to the next portal. But once trying to 
+				 incorporate this on the server, for some reason the Pac-man sprite would
+				 continuously bounce between portals. Clickable Meshes were also a very 
+				 difficult process. Since my Map included negatives, the collision function I
+				 made for Flappy Bird did not transfer nicely to Pac-man. When creating the
+				 other Pac-Man, there were a couple problems trying to have Pac-Man sprites
+				 appear for the number of Sprites. Also having the game realize when their
+				 was only one player remaining was a slightly difficult as well.
+			 </p>
+			 <br>
+			 <!-- <input type="button" onclick="location.href='http://google.com';" value="Go to Google" /> -->
+			 <input type="button" onclick="location.href='Pac-Man Game.html';" value="Start Game" class = "center"/>
+			 <br>  <br>
+			 
+			 <p class = "detailPara">
+				 Here is the link to the Pac-man Github Repo. It includes the folder where I received the sprites and audio for the game.
+				 <a href="https://github.com/youngj25/FlappyBird" align="center">Link to Pac-Man Github Repo</a>
+			 </p>
+			 
+		 </article>
+
+		 <!-- Creating a footer note -->
+		 <footer>created by Jason A. Young</footer>
+
+	 </body>
+
+	 <script type="application/javascript">	
+		 //Sockets
+		 //var socket = io.connect('http://localhost:9000');
+		 var socket = io.connect('ec2-34-205-146-82.compute-1.amazonaws.com:9000');
+			
+		 //Sends the IP address of the user to the Server, so we can receive the correct Username
+		 function getIP(json) {
+			 console.log("My public IP address is: " + json.ip);
+			 var data={ip:json.ip};
+			 socket.emit('Username',data);
+			 console.log("IP sent");		
+		 }
+		
+		 //Receives the assigned Username from the Server and sets it as the Username in this HTML
+		 socket.on('Username',function(data){
+			 console.log("Username Received");
+			 //document.getElementById("demo").innerHTML = "Username: "+data.username;			
+			 });	
+	 </script>
+		
+	 <script type="application/javascript"  src="http://api.ipify.org?format=jsonp&callback=getIP">
+	 </script>
+	 
+</html>

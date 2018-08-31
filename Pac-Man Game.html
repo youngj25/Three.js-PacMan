@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multi-player Pac-Man</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.js"></script>
+	<script type="text/javascript" src="../three.js-master/examples/js/controls/OrbitControls.js"></script>
+    <script type="text/javascript" src="../three.js-master/examples/js/controls/DragControls.js"></script>
+    <script type="text/javascript" src="../three.js-master/examples/js/controls/TrackballControls.js"></script>
+    <script src="../threex.dynamictexture-master/threex.dynamictexture.js"></script>
+	<script src="../threex.dynamictexture-master/threex.dynamictext2dobject.js"></script>
+	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+	<link rel="stylesheet" type="text/css" href="Pac.css" />
+	<link rel="stylesheet" type="text/css" href="../Main.css" />
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<header>
+   <h1>J.A.Y.'s Multi-player Networking Arcade!!!</h1>
+</header>
+  
+ <!-- NAV -->
+<nav class="navbar navbar-inverse navbar-static-top"> 
+  <div class="container-fluid">
+    <div class="navbar-header">
+		 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<!-- Gives me the links in the button-->
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>  
+		</button>
+	  <!-- <a class="navbar-brand" href="#" id="demo">Username: </a> -->
+    </div>
+	<div class = "collapse navbar-collapse" id="myNavbar">
+    <ul class="nav navbar-nav">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../FlappyBird/FlappyBird.html">Flappy Bird</a></li>
+      <li><a href="../Domino/Domino.html">Domino</a></li>
+      <li class ="active"><a>Pac-Man</a></li>
+	  <li><a href="../CB_Park/park.html">Park</a></li>
+	   <li><a href="../ReactExamples/React.html">React</a></li>
+    </ul>
+	<ul class = "nav navbar-nav navbar-right">
+	</ul>
+  </div>
+  </div>
+</nav>
+
+<article>
+  <!-- <h1 align= "center"><U>Pac-Man:</U></h1> -->
+	<p  style="font-size:150%","text-align:center;">
+	<!-- -Use the arrows keys to control the Pac-man character -->
+	</p>
+	<div class = "container-fluid">
+		<!-- <div id="WebGL-output" align= "center" align="bottom"  width="640" height="480"></div> -->
+		<div id="WebGL-output" align= "center" align="bottom"></div>
+		<div class = "RedP"> 
+			The Pac-man characters can be controlled by both the arrow keys and WASD keys.
+		</div>
+		<div class = "BlueP"> 
+			The Game Countdown can be reduced by simply pressing the SpaceBar
+		</div>
+		
+	</div>
+
+	<script src="game.js" type="text/javascript" align= "left">
+		//console.log("1");
+		
+		//Sockets
+		//var socket = io.connect('http://localhost:9000');
+		var socket = io.connect('ec2-34-205-146-82.compute-1.amazonaws.com:9000');
+		
+		//function joinGame();
+		//console.log("2");
+	</script>
+</article>	
+<!-- Creating a footer note -->
+</body>
+<script type="application/javascript">	
+	//Sockets
+		//socket = io.connect('http://localhost:9000');
+		socket = io.connect('ec2-34-205-146-82.compute-1.amazonaws.com:9000');
+		
+	//Sends the IP address of the user to the Server, so we can receive the correct Username
+	function getIP(json) {
+		console.log("My public IP address is: " + json.ip);
+		var data={ip:json.ip};
+		socket.emit('Username',data);
+		console.log("IP sent");		
+	}
+	
+	//Receives the assigned Username from the Server and sets it as the Username in this HTML
+	socket.on('Username',function(data){
+		console.log("Username Received");
+		//document.getElementById("demo").innerHTML ="Username: "+ data.username;			
+		});	
+	</script>
+	
+	<script type="application/javascript" 
+          src="http://api.ipify.org?format=jsonp&callback=getIP">
+	</script>
+	<footer>created by Jason A. Young</footer>
+</html>

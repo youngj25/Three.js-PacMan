@@ -1,0 +1,9 @@
+
+canvas {
+  border: 1px solid black;
+  height: 70vw; width: 70vw;  /* enforce 1:1 ratio (by making height & width use same vw value) */
+  /* vw represents percentage of window width (thus 50vw is 50% window width)
+     to use height percentage instead, uses 'vh' */
+}
+
+/*CSS, you are just as garbage as JavaScript. Don't you forget it.*/
