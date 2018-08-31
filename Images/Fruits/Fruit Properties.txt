@@ -1,0 +1,9 @@
+List of Fruits
+Fruit 0 - Apple		- 	Ghosts attempt to stay clear
+Fruit 1 - Banana	-	Speed doubled but density is 1/2 and receive 20pts
+Fruit 2 - Cherry	-	Attracts All Ghost to you (Very Short Time)
+Fruit 3 - Orange	-	Density doubled but speed is 3/4 and receive 50pts
+Fruit 4 - Pear		-	
+Fruit 5 - Pretzel	-	Increase Score by 150pts
+Fruit 6 - Strawberry	-	Random player's speed and density decreases
+Fruit 7 - Grape		-	Slight speed boost and random direction
