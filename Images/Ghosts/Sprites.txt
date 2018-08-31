@@ -1,0 +1,34 @@
+When the Ghost status is set to "Scared" they turn blue... 
+
+but when the status is set to "" they blink white and blue
+
+and then when they return to "Chase"
+
+
+Sites:
+//https://www.destructoid.com/blinky-inky-pinky-and-clyde-a-small-onomastic-study-108669.phtml
+//
+
+Clyde-
+Paying close attention to the way that Clyde moves about each maze, you will begin to realize that he is not at all in hot pursuit of the enemy. He goes where he pleases, not even really giving chase if he happens to accidentally stumble upon Pac-Man's location. Because of his disinterest in engaging the enemy, it can be assumed that perhaps he does not feel dislike towards Pac-Man as the other ghosts seem to. Or, he could just be too dim to really care one way or the other. Clyde is truly the idiot of the group, and the ghost to be least worried about.
+
+Inky-
+
+
+
+Pinky-
+Pinky, despite his real name being Speedy, is no really no faster than his brethren. The name could be more of a reference to his knack for covering more of the map than any other ghost. At first glance, his moves may appear to make no sense, but Pinky has a method to his madness. He is just taking the most roundabout path he possibly can to get to Pac-Man. Pinky's real name also lost a lot of its meaning in translation. In Japan, Pinky is known as Machibuse ("ambusher"), which makes a lot more sense when contrasted with his actions. He is unable to work alone, and instead employs the help of his red brother Blinky to help him ambush Pac-Man and trap him in corners. While Blinky gives constant chase, Pinky covers all corners of the map to cut down Pac-Man's choices of where to hide. Because of his ability to strategize, one can assume that Pinky is the most intelligent ghost of the group, and one to be very wary of.
+
+
+
+Blinky-
+
+
+Site:
+https://www.youtube.com/watch?v=qwhXIzNrb9w
+
+consider A* for blinky Chase mode
+
+
+
+
